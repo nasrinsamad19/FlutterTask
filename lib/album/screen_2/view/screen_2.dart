@@ -42,17 +42,9 @@ class _albumState extends State<album> {
                             future: _futureAlbum,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
-                                return Container(
-                                  width: MediaQuery.of(context).size.width * .8 ,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(30),
-                                    image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(snapshot.data.url),
-                                    ),
-                                  ),
+                                return ClipRRect(
+                                     borderRadius: BorderRadius.circular(30),
+                                child: Image.file(File(snapshot.data.url),height: 100,width: MediaQuery.of(context).size.width * .85 ,fit: BoxFit.fill,),
                                 );
                               } else if (snapshot.hasError) {
                                 return Text('${snapshot.error}');

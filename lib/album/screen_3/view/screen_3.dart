@@ -35,7 +35,7 @@ class _postState extends State<post> {
                               if (snapshot.hasData) {
                                 return Container(
                                   padding: EdgeInsets.all(20),
-                                  width: MediaQuery.of(context).size.width * .76 ,
+                                  width: MediaQuery.of(context).size.width * .78 ,
                                   height: 100,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.rectangle,
