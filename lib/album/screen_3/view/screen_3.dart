@@ -35,14 +35,17 @@ class _postState extends State<post> {
                               if (snapshot.hasData) {
                                 return Container(
                                   padding: EdgeInsets.all(20),
-                                  width: 300,
+                                  width: MediaQuery.of(context).size.width * .76 ,
                                   height: 100,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.rectangle,
                                     color: Colors.grey,
                                     borderRadius: BorderRadius.circular(30),
                                   ),
-                                  child: Text(snapshot.data.body),
+                                  child: Text(snapshot.data.body,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 4,
+                                      style: TextStyle(fontSize: 12, color: Colors.black)),
                                 );
                               } else if (snapshot.hasError) {
                                 return Text('${snapshot.error}');
@@ -137,7 +140,10 @@ class _postState extends State<post> {
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Text(data[index].body),
+                    child: Text(data[index].body,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 4,
+                        style: TextStyle(fontSize: 12, color: Colors.black)),
                   );
                 });
           } else if (snapshot.hasError) {

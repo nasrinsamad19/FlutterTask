@@ -6,6 +6,8 @@ import 'package:flutter/painting.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sample_flutter_app/album/screen_2/model/album_model.dart';
 import 'package:sample_flutter_app/album/screen_2/view_provider/album_view_provider.dart';
+import 'package:sample_flutter_app/album/screen_3/model/comment_model.dart';
+import 'package:sample_flutter_app/album/screen_3/view_provider/comment_view_provider.dart';
 
 class album extends StatefulWidget {
   @override
@@ -15,6 +17,12 @@ class album extends StatefulWidget {
 class _albumState extends State<album> {
   Future<Album> _futureAlbum;
   bool newAlbum = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +43,14 @@ class _albumState extends State<album> {
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 return Container(
-                                  width: 300,
+                                  width: MediaQuery.of(context).size.width * .8 ,
                                   height: 100,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.rectangle,
                                     borderRadius: BorderRadius.circular(30),
                                     image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: ExactAssetImage(snapshot.data.url),
+                                      image: AssetImage(snapshot.data.url),
                                     ),
                                   ),
                                 );
@@ -52,7 +60,7 @@ class _albumState extends State<album> {
                               return CircularProgressIndicator();
                             })
                         : Container(),
-                    //ScrollAlbum(),
+                    ScrollAlbum(),
                   ],
                 ),
               ),
@@ -90,7 +98,8 @@ class _albumState extends State<album> {
   Widget ScrollAlbum() {
     return Padding(
       padding: EdgeInsets.only(left: 30, right: 30),
-      child: FutureBuilder<List<Album>>(
+      child:
+      FutureBuilder<List<Album>>(
         future: fetchData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -106,17 +115,17 @@ class _albumState extends State<album> {
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    width: 50,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(30),
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(data[index].thumbnailUrl),
+                      width: 300,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(30),
+                        image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(data[index].url),
+                        ),
                       ),
-                    ),
-                  );
+                    );
                 });
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

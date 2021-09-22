@@ -4,7 +4,7 @@ import 'dart:convert';
 
 Future<List<Album>> fetchData() async {
   final response =
-      await http.get("https://jsonplaceholder.typicode.com/photos");
+      await http.get("https://jsonplaceholder.typicode.com/albums/1/photos");
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     print(jsonResponse);
@@ -23,7 +23,7 @@ Future<Album> createAlbum(String url) async {
       'url': url,
     }),
   );
-  print(response.body);
+  //print(response.body);
   print(response.statusCode);
   if (response.statusCode == 201) {
     return Album.fromJson(jsonDecode(response.body));
